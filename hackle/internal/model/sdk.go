@@ -16,5 +16,5 @@ func NewSdk(sdkKey string) Sdk {
 
 const (
 	SdkName    = "go-sdk"
-	SdkVersion = "0.0.1-SNAPSHOT"
+	SdkVersion = "1.0.0"
 )
