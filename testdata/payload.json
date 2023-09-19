@@ -1,0 +1,74 @@
+{
+  "exposureEvents": [
+    {
+      "insertId": "experiment-1",
+      "timestamp": 10000,
+      "userId": "id",
+      "identifiers": {
+        "$id": "id",
+        "$deviceId": "deviceId"
+      },
+      "userProperties": {
+        "age": 42
+      },
+      "hackleProperties": {},
+      "experimentId": 1,
+      "experimentKey": 2,
+      "experimentType": "AB_TEST",
+      "experimentVersion": 3,
+      "variationId": 4,
+      "variationKey": "A",
+      "decisionReason": "EXPERIMENT_DRAFT",
+      "properties": {
+        "$experiment_version": 5,
+        "$execution_version": 6
+      }
+    }
+  ],
+  "trackEvents": [
+    {
+      "insertId": "track-1",
+      "timestamp": 20000,
+      "userId": "id",
+      "identifiers": {
+        "$id": "id",
+        "$deviceId": "deviceId"
+      },
+      "userProperties": {
+        "age": 42
+      },
+      "hackleProperties": {},
+      "eventTypeId": 101,
+      "eventTypeKey": "test",
+      "value": 42.0,
+      "properties": {
+        "a": "b"
+      }
+    }
+  ],
+  "remoteConfigEvents": [
+    {
+      "insertId": "rc-1",
+      "timestamp": 30000,
+      "userId": "id",
+      "identifiers": {
+        "$id": "id",
+        "$deviceId": "deviceId"
+      },
+      "userProperties": {
+        "age": 42
+      },
+      "hackleProperties": {},
+      "parameterId": 201,
+      "parameterKey": "rc_key",
+      "parameterType": "STRING",
+      "valueId": 202,
+      "decisionReason": "DEFAULT_RULE",
+      "properties": {
+        "requestValueType": "STRING",
+        "requestDefaultValue": "default",
+        "returnValue": "return"
+      }
+    }
+  ]
+}
