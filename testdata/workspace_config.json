@@ -1,0 +1,1529 @@
+{
+  "workspace": {
+    "id": 553,
+    "environment": {
+      "id": 1105,
+      "primary": true
+    }
+  },
+  "experiments": [
+    {
+      "id": 4318,
+      "key": 5,
+      "status": "DRAFT",
+      "version": 1,
+      "bucketId": 6094,
+      "variations": [
+        {
+          "id": 13378,
+          "key": "A",
+          "status": "ACTIVE",
+          "parameterConfigurationId": 1
+        },
+        {
+          "id": 13379,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8630,
+        "status": "READY",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6094
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4319,
+      "key": 6,
+      "name": "experiment_6",
+      "status": "DRAFT",
+      "version": 1,
+      "bucketId": 6097,
+      "variations": [
+        {
+          "id": 13380,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13381,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8632,
+        "status": "READY",
+        "version": 1,
+        "userOverrides": [
+          {
+            "userId": "user_1",
+            "variationId": 13380
+          },
+          {
+            "userId": "user_2",
+            "variationId": 13381
+          }
+        ],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6097
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4320,
+      "key": 7,
+      "status": "EXECUTED",
+      "version": 2,
+      "bucketId": 6100,
+      "variations": [
+        {
+          "id": 13382,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13383,
+          "key": "B",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13384,
+          "key": "C",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8634,
+        "status": "RUNNING",
+        "version": 3,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [
+          {
+            "conditions": [
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "age"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "GTE",
+                  "valueType": "NUMBER",
+                  "values": [
+                    20
+                  ]
+                }
+              },
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "age"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "LT",
+                  "valueType": "NUMBER",
+                  "values": [
+                    30
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "conditions": [
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "platform"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "IN",
+                  "valueType": "STRING",
+                  "values": [
+                    "android",
+                    "ios"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "conditions": [
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "membership"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "IN",
+                  "valueType": "BOOLEAN",
+                  "values": [
+                    true
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6100
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4321,
+      "key": 8,
+      "status": "EXECUTED",
+      "version": 1,
+      "bucketId": 6103,
+      "variations": [
+        {
+          "id": 13385,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13386,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8636,
+        "status": "RUNNING",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [
+          {
+            "conditions": [
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "address"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "CONTAINS",
+                  "valueType": "STRING",
+                  "values": [
+                    "seoul"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "conditions": [
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "name"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "STARTS_WITH",
+                  "valueType": "STRING",
+                  "values": [
+                    "kim"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "conditions": [
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "message"
+                },
+                "match": {
+                  "type": "NOT_MATCH",
+                  "operator": "ENDS_WITH",
+                  "valueType": "STRING",
+                  "values": [
+                    "!"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "conditions": [
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "point"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "GT",
+                  "valueType": "NUMBER",
+                  "values": [
+                    100
+                  ]
+                }
+              },
+              {
+                "key": {
+                  "type": "USER_PROPERTY",
+                  "name": "point"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "operator": "LTE",
+                  "valueType": "NUMBER",
+                  "values": [
+                    200
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6103
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4322,
+      "key": 9,
+      "status": "EXECUTED",
+      "version": 1,
+      "bucketId": 6106,
+      "variations": [
+        {
+          "id": 13387,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13388,
+          "key": "B",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13389,
+          "key": "C",
+          "status": "DROPPED"
+        }
+      ],
+      "execution": {
+        "id": 8638,
+        "status": "RUNNING",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6106
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4323,
+      "key": 10,
+      "status": "EXECUTED",
+      "version": 1,
+      "bucketId": 6109,
+      "variations": [
+        {
+          "id": 13390,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13391,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8640,
+        "status": "PAUSED",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6109
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4324,
+      "key": 11,
+      "status": "COMPLETED",
+      "version": 1,
+      "bucketId": 6112,
+      "variations": [
+        {
+          "id": 13392,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13393,
+          "key": "B",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13394,
+          "key": "C",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13395,
+          "key": "D",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8642,
+        "status": "STOPPED",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6112
+        }
+      },
+      "winnerVariationId": 13395,
+      "identifierType": "$id",
+      "containerId": null
+    }
+  ],
+  "featureFlags": [
+    {
+      "id": 4325,
+      "key": 1,
+      "status": "EXECUTED",
+      "version": 1,
+      "bucketId": 6115,
+      "variations": [
+        {
+          "id": 13396,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13397,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8644,
+        "status": "PAUSED",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6115
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4326,
+      "key": 2,
+      "status": "EXECUTED",
+      "version": 1,
+      "bucketId": 6118,
+      "variations": [
+        {
+          "id": 13398,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13399,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8646,
+        "status": "RUNNING",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6118
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4327,
+      "key": 3,
+      "status": "EXECUTED",
+      "version": 1,
+      "bucketId": 6121,
+      "variations": [
+        {
+          "id": 13400,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13401,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8648,
+        "status": "RUNNING",
+        "version": 1,
+        "userOverrides": [],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6121
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    },
+    {
+      "id": 4328,
+      "key": 4,
+      "status": "EXECUTED",
+      "version": 1,
+      "bucketId": 6124,
+      "variations": [
+        {
+          "id": 13402,
+          "key": "A",
+          "status": "ACTIVE"
+        },
+        {
+          "id": 13403,
+          "key": "B",
+          "status": "ACTIVE"
+        }
+      ],
+      "execution": {
+        "id": 8650,
+        "status": "RUNNING",
+        "version": 1,
+        "userOverrides": [
+          {
+            "userId": "user1",
+            "variationId": 13402
+          },
+          {
+            "userId": "user2",
+            "variationId": 13403
+          }
+        ],
+        "segmentOverrides": [],
+        "targetAudiences": [],
+        "targetRules": [
+          {
+            "target": {
+              "conditions": [
+                {
+                  "key": {
+                    "type": "USER_PROPERTY",
+                    "name": "device"
+                  },
+                  "match": {
+                    "type": "MATCH",
+                    "operator": "IN",
+                    "valueType": "STRING",
+                    "values": [
+                      "android"
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "type": "USER_PROPERTY",
+                    "name": "version"
+                  },
+                  "match": {
+                    "type": "MATCH",
+                    "operator": "IN",
+                    "valueType": "STRING",
+                    "values": [
+                      "1.0.0",
+                      "1.1.0"
+                    ]
+                  }
+                }
+              ]
+            },
+            "action": {
+              "type": "BUCKET",
+              "bucketId": 6125
+            }
+          },
+          {
+            "target": {
+              "conditions": [
+                {
+                  "key": {
+                    "type": "USER_PROPERTY",
+                    "name": "device"
+                  },
+                  "match": {
+                    "type": "MATCH",
+                    "operator": "IN",
+                    "valueType": "STRING",
+                    "values": [
+                      "ios"
+                    ]
+                  }
+                },
+                {
+                  "key": {
+                    "type": "USER_PROPERTY",
+                    "name": "version"
+                  },
+                  "match": {
+                    "type": "MATCH",
+                    "operator": "IN",
+                    "valueType": "STRING",
+                    "values": [
+                      "2.0.0",
+                      "2.1.0"
+                    ]
+                  }
+                }
+              ]
+            },
+            "action": {
+              "type": "BUCKET",
+              "bucketId": 6126
+            }
+          },
+          {
+            "target": {
+              "conditions": [
+                {
+                  "key": {
+                    "type": "USER_PROPERTY",
+                    "name": "grade"
+                  },
+                  "match": {
+                    "type": "MATCH",
+                    "operator": "IN",
+                    "valueType": "STRING",
+                    "values": [
+                      "GOLD",
+                      "SILVER"
+                    ]
+                  }
+                }
+              ]
+            },
+            "action": {
+              "type": "VARIATION",
+              "variationId": 13403
+            }
+          },
+          {
+            "target": {
+              "conditions": [
+                {
+                  "key": {
+                    "type": "USER_PROPERTY",
+                    "name": "grade"
+                  },
+                  "match": {
+                    "type": "MATCH",
+                    "operator": "IN",
+                    "valueType": "STRING",
+                    "values": [
+                      "BRONZE"
+                    ]
+                  }
+                }
+              ]
+            },
+            "action": {
+              "type": "VARIATION",
+              "variationId": 13402
+            }
+          }
+        ],
+        "defaultRule": {
+          "type": "BUCKET",
+          "bucketId": 6124
+        }
+      },
+      "winnerVariationId": null,
+      "identifierType": "$id",
+      "containerId": null
+    }
+  ],
+  "buckets": [
+    {
+      "id": 5823,
+      "seed": 875758774,
+      "slotSize": 10000,
+      "slots": []
+    },
+    {
+      "id": 5826,
+      "seed": 1616382391,
+      "slotSize": 10000,
+      "slots": []
+    },
+    {
+      "id": 5829,
+      "seed": 1634243589,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 667,
+          "variationId": 12919
+        },
+        {
+          "startInclusive": 667,
+          "endExclusive": 1333,
+          "variationId": 12920
+        },
+        {
+          "startInclusive": 1333,
+          "endExclusive": 2000,
+          "variationId": 12921
+        }
+      ]
+    },
+    {
+      "id": 6094,
+      "seed": 657878848,
+      "slotSize": 10000,
+      "slots": []
+    },
+    {
+      "id": 6097,
+      "seed": 1730934769,
+      "slotSize": 10000,
+      "slots": []
+    },
+    {
+      "id": 6100,
+      "seed": 1534529362,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 1000,
+          "variationId": 13382
+        },
+        {
+          "startInclusive": 1000,
+          "endExclusive": 2000,
+          "variationId": 13383
+        },
+        {
+          "startInclusive": 2000,
+          "endExclusive": 3000,
+          "variationId": 13384
+        }
+      ]
+    },
+    {
+      "id": 6103,
+      "seed": 1248919446,
+      "slotSize": 10000,
+      "slots": []
+    },
+    {
+      "id": 6106,
+      "seed": 789801074,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 3333,
+          "variationId": 13387
+        },
+        {
+          "startInclusive": 3333,
+          "endExclusive": 6667,
+          "variationId": 13388
+        },
+        {
+          "startInclusive": 6667,
+          "endExclusive": 10000,
+          "variationId": 13389
+        }
+      ]
+    },
+    {
+      "id": 6109,
+      "seed": 1483294971,
+      "slotSize": 10000,
+      "slots": []
+    },
+    {
+      "id": 6112,
+      "seed": 2026965524,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 250,
+          "variationId": 13392
+        },
+        {
+          "startInclusive": 250,
+          "endExclusive": 500,
+          "variationId": 13393
+        },
+        {
+          "startInclusive": 500,
+          "endExclusive": 750,
+          "variationId": 13394
+        },
+        {
+          "startInclusive": 750,
+          "endExclusive": 1000,
+          "variationId": 13395
+        },
+        {
+          "startInclusive": 1000,
+          "endExclusive": 2000,
+          "variationId": 13392
+        },
+        {
+          "startInclusive": 2000,
+          "endExclusive": 3000,
+          "variationId": 13393
+        },
+        {
+          "startInclusive": 3000,
+          "endExclusive": 4000,
+          "variationId": 13394
+        },
+        {
+          "startInclusive": 4000,
+          "endExclusive": 5000,
+          "variationId": 13395
+        },
+        {
+          "startInclusive": 5000,
+          "endExclusive": 6250,
+          "variationId": 13392
+        },
+        {
+          "startInclusive": 6250,
+          "endExclusive": 7500,
+          "variationId": 13393
+        },
+        {
+          "startInclusive": 7500,
+          "endExclusive": 8750,
+          "variationId": 13394
+        },
+        {
+          "startInclusive": 8750,
+          "endExclusive": 10000,
+          "variationId": 13395
+        }
+      ]
+    },
+    {
+      "id": 6115,
+      "seed": 228721685,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 10000,
+          "variationId": 13396
+        }
+      ]
+    },
+    {
+      "id": 6118,
+      "seed": 1392731944,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 10000,
+          "variationId": 13398
+        }
+      ]
+    },
+    {
+      "id": 6121,
+      "seed": 1037967975,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 2700,
+          "variationId": 13400
+        },
+        {
+          "startInclusive": 2700,
+          "endExclusive": 10000,
+          "variationId": 13401
+        }
+      ]
+    },
+    {
+      "id": 6124,
+      "seed": 915616338,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 5000,
+          "variationId": 13402
+        },
+        {
+          "startInclusive": 5000,
+          "endExclusive": 10000,
+          "variationId": 13403
+        }
+      ]
+    },
+    {
+      "id": 6125,
+      "seed": 915616338,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 9000,
+          "variationId": 13402
+        },
+        {
+          "startInclusive": 9000,
+          "endExclusive": 10000,
+          "variationId": 13403
+        }
+      ]
+    },
+    {
+      "id": 6126,
+      "seed": 915616338,
+      "slotSize": 10000,
+      "slots": [
+        {
+          "startInclusive": 0,
+          "endExclusive": 8000,
+          "variationId": 13402
+        },
+        {
+          "startInclusive": 8000,
+          "endExclusive": 10000,
+          "variationId": 13403
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": 3072,
+      "key": "a"
+    },
+    {
+      "id": 3073,
+      "key": "b"
+    },
+    {
+      "id": 3074,
+      "key": "c"
+    },
+    {
+      "id": 3075,
+      "key": "d"
+    }
+  ],
+  "segments": [
+    {
+      "id": 34,
+      "key": "Internal_QA",
+      "type": "USER_ID",
+      "targets": [
+        {
+          "conditions": [
+            {
+              "key": {
+                "type": "USER_ID",
+                "name": "$id"
+              },
+              "match": {
+                "type": "MATCH",
+                "operator": "IN",
+                "valueType": "STRING",
+                "values": [
+                  "68d3abc3-d19d-4838-9024-65b4e3fb2278",
+                  "519eddc0-ef78-4190-9221-8d8d5dffd2cc",
+                  "e67a62a5-af75-44e3-ae3f-4cd5b816c693",
+                  "54bcd6cc-9798-45d8-be6a-37f0db9da97f",
+                  "8346eb43-56e9-4b53-b4ec-0dbd11f44190",
+                  "6992e91e-0ea2-4de6-bc3e-f54abe68e35d",
+                  "868f6173-5850-430f-89a1-4c71c0c47696",
+                  "00864add-af72-4120-9a67-627d92ed4d01",
+                  "4e5aa440-fc26-4d03-a95d-bbdd13325c12",
+                  "b4f1f1d8-8a1a-4cd8-a2e4-f1c67506e19e",
+                  "4cd82896-0fa9-4948-a09a-c3b2e691fa03",
+                  "4e1d3c43-cb5f-44ce-9566-a4aa76c8f503",
+                  "399ad83b-3f35-466c-82db-1aa17745545b",
+                  "f5f39d5a-cdef-4854-80eb-bb94d3708bfa",
+                  "7ac770ba-c000-4f5a-a0a5-fc64f5171e62",
+                  "3d0781c0-3547-4b3c-970a-83fee31b80ae",
+                  "9d5316f3-69cf-4b7b-9223-2e6e7af64d48",
+                  "9fcb795e-3cfd-4e17-84d2-9da89a191baa",
+                  "9d2d7d8c-a0cf-458a-a7a3-1e77729bd0a3",
+                  "cc4bab79-bd92-4ee8-9521-91f6ddfc5964",
+                  "be3b69d0-2f9b-43c1-a057-20685555436b",
+                  "d9872fbe-bb5c-4e2a-9bf3-3a79342a7bfe",
+                  "b2fc7909-2753-4869-a637-5f82d4b1d692",
+                  "583754b2-0bf9-40de-9325-02308f678dc5",
+                  "7d824051-2041-4342-ab37-b619b3559bf5",
+                  "04fe7b7d-8220-4b04-a6fa-1f558ef081da",
+                  "246a5ce0-2bfe-458d-adf3-6f1c1ab8135b",
+                  "7cb75039-2f7a-4bc8-88a0-68185a350422",
+                  "84de60fb-3072-4a4c-9496-611f1aeeca6d",
+                  "17ddc8e6-f9b0-4039-a70c-8f83b7598685",
+                  "1ed2a103-7a2a-4aa5-8691-9b2a00337828",
+                  "ab396179-2d46-4348-a642-416e7ebd77a0"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "key": "test",
+      "type": "USER_ID",
+      "targets": []
+    },
+    {
+      "id": 81,
+      "key": "not_hackle",
+      "type": "USER_PROPERTY",
+      "targets": [
+        {
+          "conditions": [
+            {
+              "key": {
+                "type": "USER_PROPERTY",
+                "name": "workspaceId"
+              },
+              "match": {
+                "type": "NOT_MATCH",
+                "operator": "IN",
+                "valueType": "STRING",
+                "values": [
+                  "22"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 89,
+      "key": "mia",
+      "type": "USER_ID",
+      "targets": [
+        {
+          "conditions": [
+            {
+              "key": {
+                "type": "USER_ID",
+                "name": "$id"
+              },
+              "match": {
+                "type": "MATCH",
+                "operator": "IN",
+                "valueType": "STRING",
+                "values": [
+                  "00864add-af72-4120-9a67-627d92ed4d01"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 179,
+      "key": "test_users",
+      "type": "USER_PROPERTY",
+      "targets": [
+        {
+          "conditions": [
+            {
+              "key": {
+                "type": "USER_PROPERTY",
+                "name": "test_device"
+              },
+              "match": {
+                "type": "MATCH",
+                "operator": "IN",
+                "valueType": "BOOLEAN",
+                "values": [
+                  true
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "containers": [
+    {
+      "id": 2,
+      "environmentId": 43,
+      "bucketId": 86557,
+      "groups": [
+        {
+          "id": 3,
+          "experiments": [
+            30767,
+            31073
+          ]
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "environmentId": 43,
+      "bucketId": 90597,
+      "groups": [
+        {
+          "id": 54,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "environmentId": 43,
+      "bucketId": 93186,
+      "groups": [
+        {
+          "id": 49,
+          "experiments": [
+            32769
+          ]
+        },
+        {
+          "id": 50,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "environmentId": 43,
+      "bucketId": 93186,
+      "groups": [
+        {
+          "id": 49,
+          "experiments": [
+            32769
+          ]
+        },
+        {
+          "id": 50,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "environmentId": 43,
+      "bucketId": 95105,
+      "groups": [
+        {
+          "id": 51,
+          "experiments": [
+            33364
+          ]
+        },
+        {
+          "id": 52,
+          "experiments": [
+            11205
+          ]
+        },
+        {
+          "id": 53,
+          "experiments": [
+            9976
+          ]
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "environmentId": 43,
+      "bucketId": 95105,
+      "groups": [
+        {
+          "id": 51,
+          "experiments": [
+            33364
+          ]
+        },
+        {
+          "id": 52,
+          "experiments": [
+            11205
+          ]
+        },
+        {
+          "id": 53,
+          "experiments": [
+            9976
+          ]
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "environmentId": 43,
+      "bucketId": 95105,
+      "groups": [
+        {
+          "id": 51,
+          "experiments": [
+            33364
+          ]
+        },
+        {
+          "id": 52,
+          "experiments": [
+            11205
+          ]
+        },
+        {
+          "id": 53,
+          "experiments": [
+            9976
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "environmentId": 43,
+      "bucketId": 96849,
+      "groups": [
+        {
+          "id": 55,
+          "experiments": [
+            33893
+          ]
+        }
+      ]
+    },
+    {
+      "id": 39,
+      "environmentId": 43,
+      "bucketId": 96852,
+      "groups": [
+        {
+          "id": 56,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 49,
+      "environmentId": 43,
+      "bucketId": 101483,
+      "groups": [
+        {
+          "id": 67,
+          "experiments": [
+            35292
+          ]
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "environmentId": 43,
+      "bucketId": 102336,
+      "groups": [
+        {
+          "id": 68,
+          "experiments": [
+            35530
+          ]
+        },
+        {
+          "id": 69,
+          "experiments": [
+            34458
+          ]
+        },
+        {
+          "id": 70,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "environmentId": 43,
+      "bucketId": 102336,
+      "groups": [
+        {
+          "id": 68,
+          "experiments": [
+            35530
+          ]
+        },
+        {
+          "id": 69,
+          "experiments": [
+            34458
+          ]
+        },
+        {
+          "id": 70,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 50,
+      "environmentId": 43,
+      "bucketId": 102336,
+      "groups": [
+        {
+          "id": 68,
+          "experiments": [
+            35530
+          ]
+        },
+        {
+          "id": 69,
+          "experiments": [
+            34458
+          ]
+        },
+        {
+          "id": 70,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "environmentId": 43,
+      "bucketId": 104224,
+      "groups": [
+        {
+          "id": 75,
+          "experiments": [
+            36119
+          ]
+        },
+        {
+          "id": 76,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 53,
+      "environmentId": 43,
+      "bucketId": 104224,
+      "groups": [
+        {
+          "id": 75,
+          "experiments": [
+            36119
+          ]
+        },
+        {
+          "id": 76,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "environmentId": 43,
+      "bucketId": 104613,
+      "groups": [
+        {
+          "id": 79,
+          "experiments": [
+            35750,
+            36401
+          ]
+        },
+        {
+          "id": 80,
+          "experiments": []
+        }
+      ]
+    },
+    {
+      "id": 54,
+      "environmentId": 43,
+      "bucketId": 104613,
+      "groups": [
+        {
+          "id": 79,
+          "experiments": [
+            35750,
+            36401
+          ]
+        },
+        {
+          "id": 80,
+          "experiments": []
+        }
+      ]
+    }
+  ],
+  "parameterConfigurations": [
+    {
+      "id": 1,
+      "parameters": [
+        {
+          "key": "string_key_1",
+          "value": "string_value_1"
+        },
+        {
+          "key": "boolean_key_1",
+          "value": true
+        },
+        {
+          "key": "int_key_1",
+          "value": 2147483647
+        },
+        {
+          "key": "long_key_1",
+          "value": 92147483647
+        },
+        {
+          "key": "double_key_1",
+          "value": 320.1523
+        },
+        {
+          "key": "json_key_1",
+          "value": "{\"json_key\": \"json_value\"}"
+        }
+      ]
+    }
+  ],
+  "remoteConfigParameters": [
+    {
+      "id": 1,
+      "key": "json_key_1",
+      "type": "JSON",
+      "identifierType": "$id",
+      "targetRules": [
+        {
+          "key": "29d404c5-e154-4ba2-add9-3dd261b059d6",
+          "name": "target1",
+          "target": {
+            "conditions": [
+              {
+                "key": {
+                  "name": "condition1_key",
+                  "type": "HACKLE_PROPERTY"
+                },
+                "match": {
+                  "type": "MATCH",
+                  "values": [
+                    "value1",
+                    "value2",
+                    "value3"
+                  ],
+                  "valueType": "STRING",
+                  "operator": "IN"
+                }
+              }
+            ]
+          },
+          "bucketId": 1,
+          "value": {
+            "id": 1,
+            "value": "{\"json_key\": \"json_value\"}"
+          }
+        }
+      ],
+      "defaultValue": {
+        "id": 1,
+        "value": "{\"json_key\": \"default_value\"}"
+      }
+    }
+  ]
+}
