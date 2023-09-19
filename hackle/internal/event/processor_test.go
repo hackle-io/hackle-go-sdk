@@ -73,7 +73,7 @@ func TestProcessor_Process(t *testing.T) {
 
 		sut.Process(baseUserEvent{})
 		time.Sleep(100 * time.Millisecond)
-		assert.Equal(t, 0, f.dispatcher.dispatchCount)
+		assert.Equal(t, 0, f.dispatcher.DispatchCount())
 	})
 
 	t.Run("when dispatch size reached then dispatch event", func(t *testing.T) {
@@ -82,11 +82,11 @@ func TestProcessor_Process(t *testing.T) {
 
 		sut.Process(baseUserEvent{insertID: "1"})
 		time.Sleep(100 * time.Millisecond)
-		assert.Equal(t, 0, f.dispatcher.dispatchCount)
+		assert.Equal(t, 0, f.dispatcher.DispatchCount())
 
 		sut.Process(baseUserEvent{insertID: "2"})
 		time.Sleep(100 * time.Millisecond)
-		assert.Equal(t, 1, f.dispatcher.dispatchCount)
+		assert.Equal(t, 1, f.dispatcher.DispatchCount())
 	})
 
 	t.Run("when flush interval reached then dispatch events", func(t *testing.T) {
@@ -100,7 +100,7 @@ func TestProcessor_Process(t *testing.T) {
 		sut.Process(baseUserEvent{insertID: "5"})
 		time.Sleep(700 * time.Millisecond)
 
-		assert.Equal(t, 1, f.dispatcher.dispatchCount)
+		assert.Equal(t, 1, f.dispatcher.DispatchCount())
 	})
 
 	t.Run("when event is empty then not dispatch", func(t *testing.T) {
@@ -109,7 +109,7 @@ func TestProcessor_Process(t *testing.T) {
 
 		time.Sleep(1 * time.Second)
 
-		assert.Equal(t, 0, f.dispatcher.dispatchCount)
+		assert.Equal(t, 0, f.dispatcher.DispatchCount())
 	})
 
 	t.Run("concurrency", func(t *testing.T) {
@@ -136,11 +136,11 @@ func TestProcessor_Process(t *testing.T) {
 
 		time.Sleep(100 * time.Millisecond)
 		results := map[string]bool{}
-		dispatched := f.dispatcher.dispatched
+		dispatched := f.dispatcher.DispatchedEvents()
 		for _, userEvent := range dispatched {
 			results[userEvent.InsertID()] = true
 		}
-		assert.Equal(t, 16*10000, f.dispatcher.eventCount)
+		assert.Equal(t, 16*10000, f.dispatcher.EventCount())
 		assert.Equal(t, 16*10000, len(results))
 	})
 }
@@ -187,7 +187,7 @@ func TestProcessor_Close(t *testing.T) {
 		sut.Close()
 		time.Sleep(100 * time.Millisecond)
 
-		assert.Equal(t, 1, f.dispatcher.dispatchCount)
+		assert.Equal(t, 1, f.dispatcher.DispatchCount())
 	})
 
 	t.Run("close dispatcher", func(t *testing.T) {
@@ -233,11 +233,29 @@ func (m *mockDispatcher) Close() {
 	m.closed = true
 }
 
+func (m *mockDispatcher) DispatchCount() int {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.dispatchCount
+}
+
+func (m *mockDispatcher) EventCount() int {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.eventCount
+}
+
+func (m *mockDispatcher) DispatchedEvents() []UserEvent {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.dispatched
+}
+
 type mockScheduler struct {
 	jobs []*mockJob
 }
 
-func (m *mockScheduler) SchedulePeriodically(delay time.Duration, period time.Duration, task func()) schedule.Job {
+func (m *mockScheduler) SchedulePeriodically(period time.Duration, task func()) schedule.Job {
 	job := &mockJob{}
 	m.jobs = append(m.jobs, job)
 	return job

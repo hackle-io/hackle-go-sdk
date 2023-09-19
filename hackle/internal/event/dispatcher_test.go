@@ -27,9 +27,9 @@ func TestDispatcher_Dispatch(t *testing.T) {
 		events := make([]UserEvent, 42)
 		sut.Dispatch(events)
 
-		assert.Equal(t, 0, len(httpClient.posts))
+		assert.Equal(t, 0, len(httpClient.Posts()))
 		wg.Wait()
-		assert.Equal(t, 1, len(httpClient.posts))
+		assert.Equal(t, 1, len(httpClient.Posts()))
 	})
 
 	t.Run("dispatch failed", func(t *testing.T) {
@@ -44,9 +44,9 @@ func TestDispatcher_Dispatch(t *testing.T) {
 		events := make([]UserEvent, 42)
 		sut.Dispatch(events)
 
-		assert.Equal(t, 0, len(httpClient.posts))
+		assert.Equal(t, 0, len(httpClient.Posts()))
 		wg.Wait()
-		assert.Equal(t, 0, len(httpClient.posts))
+		assert.Equal(t, 0, len(httpClient.Posts()))
 	})
 }
 
@@ -63,9 +63,9 @@ func TestDispatcher_Close(t *testing.T) {
 		for i := 0; i < 100; i++ {
 			sut.Dispatch(make([]UserEvent, 1))
 		}
-		assert.Equal(t, 0, len(httpClient.posts))
+		assert.Equal(t, 0, len(httpClient.Posts()))
 		sut.Close()
-		assert.Equal(t, 100, len(httpClient.posts))
+		assert.Equal(t, 100, len(httpClient.Posts()))
 	})
 }
 
@@ -93,4 +93,10 @@ func (m *mockHttpClient) PostObj(url string, body interface{}) error {
 	defer m.mu.Unlock()
 	m.posts = append(m.posts, body)
 	return nil
+}
+
+func (m *mockHttpClient) Posts() []interface{} {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.posts
 }

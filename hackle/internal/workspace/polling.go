@@ -35,7 +35,7 @@ func (f *PollingFetcher) Fetch() (Workspace, bool) {
 func (f *PollingFetcher) Start() {
 	if f.pollingJob == nil {
 		f.poll()
-		f.pollingJob = f.scheduler.SchedulePeriodically(f.pollingInterval, f.pollingInterval, f.poll)
+		f.pollingJob = f.scheduler.SchedulePeriodically(f.pollingInterval, f.poll)
 	}
 }
 

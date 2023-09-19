@@ -5,6 +5,7 @@ import (
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/mocks"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/schedule"
 	"github.com/stretchr/testify/assert"
+	"sync"
 	"testing"
 	"time"
 )
@@ -55,7 +56,7 @@ func TestPollingFetcher_Start(t *testing.T) {
 		sut.Start()
 		time.Sleep(400 * time.Millisecond)
 
-		assert.Equal(t, 3, httpFetcher.count) // 0, 250, 350 fetch / 100, 200 ignored
+		assert.Equal(t, 3, httpFetcher.Count()) // 0, 250, 350 fetch / 100, 200 ignored
 	})
 }
 
@@ -77,10 +78,13 @@ type mockHttpFetcher struct {
 	delay   time.Duration
 	returns interface{}
 	count   int
+	mu      sync.Mutex
 }
 
 func (m *mockHttpFetcher) Fetch() (Workspace, error) {
+	m.mu.Lock()
 	m.count++
+	m.mu.Unlock()
 	time.Sleep(m.delay)
 	switch r := m.returns.(type) {
 	case Workspace:
@@ -92,11 +96,17 @@ func (m *mockHttpFetcher) Fetch() (Workspace, error) {
 	}
 }
 
+func (m *mockHttpFetcher) Count() int {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	return m.count
+}
+
 type mockScheduler struct {
 	jobs []*mockJob
 }
 
-func (m *mockScheduler) SchedulePeriodically(delay time.Duration, period time.Duration, task func()) schedule.Job {
+func (m *mockScheduler) SchedulePeriodically(period time.Duration, task func()) schedule.Job {
 	job := &mockJob{}
 	m.jobs = append(m.jobs, job)
 	return job

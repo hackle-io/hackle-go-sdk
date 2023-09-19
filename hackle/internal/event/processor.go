@@ -65,7 +65,7 @@ func (p *processor) Start() {
 	p.consumingWait.Add(1)
 	go p.consuming()
 
-	p.flushingJob = p.flushScheduler.SchedulePeriodically(p.flushInterval, p.flushInterval, func() {
+	p.flushingJob = p.flushScheduler.SchedulePeriodically(p.flushInterval, func() {
 		p.queue <- flushMessage{}
 	})
 

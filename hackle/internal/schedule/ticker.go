@@ -10,7 +10,7 @@ func NewTickerScheduler() Scheduler {
 	return &tickerScheduler{}
 }
 
-func (s *tickerScheduler) SchedulePeriodically(delay time.Duration, period time.Duration, task func()) Job {
+func (s *tickerScheduler) SchedulePeriodically(period time.Duration, task func()) Job {
 	job := &tickerJob{
 		stop: make(chan bool),
 	}
@@ -18,7 +18,6 @@ func (s *tickerScheduler) SchedulePeriodically(delay time.Duration, period time.
 	ticker := time.NewTicker(period)
 	go func() {
 		defer ticker.Stop()
-		time.Sleep(delay)
 		for {
 			select {
 			case <-ticker.C:
