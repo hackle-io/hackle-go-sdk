@@ -1,6 +1,7 @@
 package event
 
 import (
+	"github.com/google/uuid"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/schedule"
 	"github.com/stretchr/testify/assert"
 	"sync"
@@ -113,12 +114,12 @@ func TestProcessor_Process(t *testing.T) {
 
 	t.Run("concurrency", func(t *testing.T) {
 
-		sut, f := eventProcessor(16*10000, 10, 10*time.Millisecond)
+		sut, f := eventProcessor(16*10000, 100, 10*time.Millisecond)
 		sut.Start()
 
 		task := func() {
 			for i := 0; i < 10000; i++ {
-				sut.Process(baseUserEvent{})
+				sut.Process(baseUserEvent{insertID: uuid.NewString()})
 			}
 		}
 
@@ -133,7 +134,14 @@ func TestProcessor_Process(t *testing.T) {
 		wg.Wait()
 		sut.Close()
 
+		time.Sleep(100 * time.Millisecond)
+		results := map[string]bool{}
+		dispatched := f.dispatcher.dispatched
+		for _, userEvent := range dispatched {
+			results[userEvent.InsertID()] = true
+		}
 		assert.Equal(t, 16*10000, f.dispatcher.eventCount)
+		assert.Equal(t, 16*10000, len(results))
 	})
 }
 
@@ -201,7 +209,7 @@ func TestProcessor_Close(t *testing.T) {
 }
 
 type mockDispatcher struct {
-	dispatched    [][]UserEvent
+	dispatched    []UserEvent
 	dispatchCount int
 	eventCount    int
 	closed        bool
@@ -213,7 +221,9 @@ func (m *mockDispatcher) Dispatch(userEvents []UserEvent) {
 	go func() {
 		m.mu.Lock()
 		defer m.mu.Unlock()
-		m.dispatched = append(m.dispatched, userEvents)
+		for _, userEvent := range userEvents {
+			m.dispatched = append(m.dispatched, userEvent)
+		}
 		m.dispatchCount++
 		m.eventCount = m.eventCount + len(userEvents)
 	}()
