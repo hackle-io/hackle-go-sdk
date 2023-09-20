@@ -4,4 +4,4 @@
 Go SDK for Hackle A/B Tests, Feature Flags, Remote Configs, and Analytics.
 
 ## Getting Started
-Check out our [SDK docs](https://docs.hackle.io/docs/go-sdk-init) to get started
+Check out our [SDK docs](https://docs.hackle.io/docs/go-sdk-init) to get started.
