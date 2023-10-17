@@ -1,9 +1,11 @@
 package hackle
 
 import (
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/clock"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/core"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/decision"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/logger"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/metrics"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/types"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/user"
 )
@@ -56,6 +58,13 @@ func (c *remoteConfig) GetBool(key string, defaultValue bool) bool {
 }
 
 func (c *remoteConfig) get(key string, defaultValue interface{}, valueType types.ValueType) RemoteConfigDecision {
+	sample := metrics.NewTimerSample(clock.System)
+	d := c.getInternal(key, defaultValue, valueType)
+	recordRemoteConfig(sample, key, d)
+	return d
+}
+
+func (c *remoteConfig) getInternal(key string, defaultValue interface{}, valueType types.ValueType) RemoteConfigDecision {
 	hackleUser, ok := c.userResolver.Resolve(c.user)
 	if !ok {
 		return decision.NewRemoteConfigDecision(defaultValue, decision.ReasonInvalidInput)

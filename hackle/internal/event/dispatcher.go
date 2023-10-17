@@ -1,8 +1,11 @@
 package event
 
 import (
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/clock"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/http"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/logger"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/metrics"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/monitoring/metric"
 	"sync"
 )
 
@@ -33,7 +36,11 @@ func (d *dispatcher) Dispatch(userEvents []UserEvent) {
 func (d *dispatcher) dispatch(userEvents []UserEvent) {
 	defer d.wg.Done()
 	dto := NewPayloadDTO(userEvents)
+
+	sample := metrics.NewTimerSample(clock.System)
 	err := d.httpClient.PostObj(d.url, dto)
+	metric.RecordAPI(metric.OperationPostEvents, sample, err == nil)
+
 	if err != nil {
 		logger.Error("Failed to dispatch events: %v", err)
 	}

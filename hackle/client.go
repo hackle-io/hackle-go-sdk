@@ -8,7 +8,9 @@ import (
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/event"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/http"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/logger"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/metrics"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/model"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/monitoring"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/schedule"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/user"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/workspace"
@@ -50,6 +52,10 @@ func createClient(sdkKey string, config *Config) Client {
 	scheduler := schedule.NewTickerScheduler()
 	httpClient := http.NewClient(sdk, clock.System, 10*time.Second)
 
+	registry := monitoring.NewMetricRegistry(config.monitoringUrl, scheduler, 60*time.Second, httpClient)
+	registry.Start()
+	metrics.AddRegistry(registry)
+
 	httpWorkspaceFetcher := workspace.NewHttpFetcher(config.sdkUrl, httpClient)
 	workspaceFetcher := workspace.NewPollingFetcher(httpWorkspaceFetcher, 10*time.Second, scheduler)
 
@@ -78,6 +84,13 @@ func (c *client) Variation(experimentKey int64, user User) string {
 }
 
 func (c *client) VariationDetail(experimentKey int64, user User) ExperimentDecision {
+	sample := metrics.NewTimerSample(clock.System)
+	d := c.variationDetail(experimentKey, user)
+	recordExperiment(sample, experimentKey, d)
+	return d
+}
+
+func (c *client) variationDetail(experimentKey int64, user User) ExperimentDecision {
 	hackleUser, ok := c.userResolver.Resolve(user)
 	if !ok {
 		return decision.NewExperimentDecision("A", decision.ReasonInvalidInput, config.Empty())
@@ -95,6 +108,13 @@ func (c *client) IsFeatureOn(featureKey int64, user User) bool {
 }
 
 func (c *client) FeatureFlagDetail(featureKey int64, user User) FeatureFlagDecision {
+	sample := metrics.NewTimerSample(clock.System)
+	d := c.featureFlagDetail(featureKey, user)
+	recordFeatureFlag(sample, featureKey, d)
+	return d
+}
+
+func (c *client) featureFlagDetail(featureKey int64, user User) FeatureFlagDecision {
 	hackleUser, ok := c.userResolver.Resolve(user)
 	if !ok {
 		return decision.NewFeatureFlagDecision(false, decision.ReasonInvalidInput, config.Empty())
@@ -121,4 +141,5 @@ func (c *client) Track(event Event, user User) {
 
 func (c *client) Close() {
 	c.core.Close()
+	metrics.GlobalRegistry().Close()
 }

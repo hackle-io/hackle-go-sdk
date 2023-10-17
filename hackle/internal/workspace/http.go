@@ -1,6 +1,11 @@
 package workspace
 
-import "github.com/hackle-io/hackle-go-sdk/hackle/internal/http"
+import (
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/clock"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/http"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/metrics"
+	"github.com/hackle-io/hackle-go-sdk/hackle/internal/monitoring/metric"
+)
 
 type HttpFetcher interface {
 	Fetch() (Workspace, error)
@@ -19,6 +24,13 @@ type httpFetcher struct {
 }
 
 func (f *httpFetcher) Fetch() (Workspace, error) {
+	sample := metrics.NewTimerSample(clock.System)
+	ws, err := f.fetch()
+	metric.RecordAPI(metric.OperationGetWorkspace, sample, err == nil)
+	return ws, err
+}
+
+func (f *httpFetcher) fetch() (Workspace, error) {
 	var dto WorkspaceDTO
 	err := f.httpClient.GetObj(f.url, &dto)
 	if err != nil {
