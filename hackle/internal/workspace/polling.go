@@ -46,10 +46,12 @@ func (f *PollingFetcher) Close() {
 }
 
 func (f *PollingFetcher) poll() {
-	ws, err := f.httpFetcher.Fetch()
+	ws, ok, err := f.httpFetcher.FetchIfModified()
 	if err != nil {
 		logger.Error("Failed to poll workspace: %v", err)
 		return
 	}
-	f.currentWorkspace = ws
+	if ok {
+		f.currentWorkspace = ws
+	}
 }
