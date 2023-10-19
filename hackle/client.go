@@ -50,7 +50,7 @@ func createClient(sdkKey string, config *Config) Client {
 	scheduler := schedule.NewTickerScheduler()
 	httpClient := http.NewClient(sdk, clock.System, 10*time.Second)
 
-	httpWorkspaceFetcher := workspace.NewHttpFetcher(config.sdkUrl, httpClient)
+	httpWorkspaceFetcher := workspace.NewHttpFetcher(config.sdkUrl, sdk, httpClient)
 	workspaceFetcher := workspace.NewPollingFetcher(httpWorkspaceFetcher, 10*time.Second, scheduler)
 
 	eventDispatcher := event.NewDispatcher(config.eventUrl, httpClient)
