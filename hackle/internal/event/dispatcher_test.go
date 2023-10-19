@@ -175,5 +175,7 @@ func (m *mockHttpClient) Execute(req *nethttp.Request) (*nethttp.Response, error
 }
 
 func (m *mockHttpClient) Called() bool {
+	m.mu.Lock()
+	defer m.mu.Unlock()
 	return m.req != nil
 }

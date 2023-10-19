@@ -3,6 +3,7 @@ package workspace
 import (
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/logger"
 	"github.com/hackle-io/hackle-go-sdk/hackle/internal/schedule"
+	"sync"
 	"time"
 )
 
@@ -12,6 +13,7 @@ type PollingFetcher struct {
 	scheduler        schedule.Scheduler
 	currentWorkspace Workspace
 	pollingJob       schedule.Job
+	mu               sync.Mutex
 }
 
 func NewPollingFetcher(httpFetcher HttpFetcher, pollingInterval time.Duration, scheduler schedule.Scheduler) *PollingFetcher {
@@ -25,6 +27,8 @@ func NewPollingFetcher(httpFetcher HttpFetcher, pollingInterval time.Duration, s
 }
 
 func (f *PollingFetcher) Fetch() (Workspace, bool) {
+	f.mu.Lock()
+	defer f.mu.Unlock()
 	if f.currentWorkspace != nil {
 		return f.currentWorkspace, true
 	} else {
@@ -52,6 +56,8 @@ func (f *PollingFetcher) poll() {
 		return
 	}
 	if ok {
+		f.mu.Lock()
+		defer f.mu.Unlock()
 		f.currentWorkspace = ws
 	}
 }

@@ -77,6 +77,7 @@ func TestPollingFetcher_Fetch(t *testing.T) {
 			)
 			ws, ok := tt.when(sut)
 			tt.then(sut, ws, ok)
+			sut.Close()
 		})
 	}
 }
@@ -267,7 +268,6 @@ func (m *mockHttpFetcher) FetchIfModified() (Workspace, bool, error) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
-	//fmt.Printf("%p %v: %d\n", m, m, m.count)
 	ret := m.returns[m.count]
 	m.count++
 	switch r := ret.(type) {

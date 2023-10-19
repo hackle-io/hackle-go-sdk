@@ -60,7 +60,6 @@ func (f *httpFetcher) handleResponse(res *nethttp.Response) (Workspace, bool, er
 	}()
 
 	if http.IsNotModified(res) {
-		logger.Info("Not-Modified")
 		return nil, false, nil
 	}
 	if !http.IsSuccessful(res) {
@@ -76,6 +75,5 @@ func (f *httpFetcher) handleResponse(res *nethttp.Response) (Workspace, bool, er
 		return nil, false, err
 	}
 
-	logger.Info("OK")
 	return NewFrom(dto), true, nil
 }
